@@ -5,16 +5,16 @@ import java.util.*;
 public class HashiraNoLib {
     public static void main(String[] args) {
         try {
-            // Step 1: Read file as plain text
+            
             String content = new String(Files.readAllBytes(Paths.get("input.json")));
 
-            // Step 2: Extract n and k safely
+            
             int n = Integer.parseInt(content.replaceAll("(?s).*\"n\"\\s*:\\s*(\\d+).*", "$1"));
             int k = Integer.parseInt(content.replaceAll("(?s).*\"k\"\\s*:\\s*(\\d+).*", "$1"));
 
             System.out.println("n = " + n + ", k = " + k);
 
-            // Step 3: Extract roots
+            
             List<BigInteger> roots = new ArrayList<>();
             for (int i = 1; i <= k; i++) {
                 // find base
@@ -22,7 +22,7 @@ public class HashiraNoLib {
                 String baseStr = content.replaceAll("(?s).*" + basePattern + ".*", "$1");
                 int base = Integer.parseInt(baseStr);
 
-                // find value
+            
                 String valuePattern = "\""+i+"\"\\s*:\\s*\\{[^}]*\"value\"\\s*:\\s*\"?([0-9a-zA-Z]+)\"?";
                 String valueStr = content.replaceAll("(?s).*" + valuePattern + ".*", "$1");
 
@@ -32,7 +32,6 @@ public class HashiraNoLib {
 
             System.out.println("Decoded roots (first k): " + roots);
 
-            // Step 4: Construct polynomial coefficients
             List<BigInteger> coeffs = new ArrayList<>();
             coeffs.add(BigInteger.ONE);
 
@@ -58,4 +57,5 @@ public class HashiraNoLib {
         }
     }
 }
+
 
